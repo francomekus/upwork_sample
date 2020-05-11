@@ -45,7 +45,8 @@ Add this to the `post/admin.py`
 ```from django.contrib import admin
 from .models import Post
 
-admin.site.register(Post)```
+admin.site.register(Post)
+```
 create a superuser to use in logging in to the admin panel
 ```$ python manage.py createsuperuser```
 and follow the instructions.
@@ -58,7 +59,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('post.urls')),
-]```
+]
+```
 #### Adding app level urls
 create a new `urls.py` file in the post folder and add this
 ```from django.urls import path
@@ -67,7 +69,8 @@ from .views import ListPost, DetailPost
 urlpatterns = [
     path('', ListPost.as_view()),
     path('<int:pk>/', DetailPost.as_view()),
-]```
+]
+```
 Note: we have not created the views yet.
 ## Creating the Serailizers.
 We have to create a serializer, which translates data into a format that is easy to consume over the internet,
@@ -79,10 +82,11 @@ from .models import Post
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('id', 'title', 'body')```
+        fields = ('id', 'title', 'body')
+   ```
 ## Create Views.
 Add this to the `post/views.py` file.
-from rest_framework import generics
+```from rest_framework import generics
 from .models import Post
 from .serializers import PostSerializer
 
@@ -92,7 +96,8 @@ class ListPost(generics.ListCreateAPIView):
 
 class DetailPost(generics.RetrieveAPIView):
     queryset = Post.objects.all()
-    serializer_class = PostSerializer```
+    serializer_class = PostSerializer
+```
 
 ## Tests
 we are done for now, but we have to test the app. Writing tests is important because it automates the process of confirming that the
@@ -120,17 +125,21 @@ class PostModelTest(TestCase):
         no_response = self.client.get('/post/450000/')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(no_response.status_code, 404)
-        self.assertContains(response, 'This is the body')```
+        self.assertContains(response, 'This is the body')
+  ```
  ### Testing our API endpoint with cURL locally.
  ``` $ python manage.py runserver
  for Post request:
- ``` $ curl http://127.0.0.1:8000 -d "title=add your title here&body=add you body here" ```
+ ``` $ curl http://127.0.0.1:8000 -d "title=add your title here&body=add you body here" 
+ ```
  for GET request:
-  ```$ curl http://127.0.0.1:8000```
+  ```$ curl http://127.0.0.1:8000
+  ```
   ## Getting ready for deployment
   1. first install
   ```$ pip install gunicorn
-     $ pip install whitenoise```
+     $ pip install whitenoise
+   ```
   2. Add a **Procfile** file with no extension(e.e txt) in the project root directoty.
   Open the **Procfile** and add
    ```web: gunicorn django_api.wsgi --log-file -```
@@ -154,7 +163,8 @@ class PostModelTest(TestCase):
   $ git add -A
   $ git commit -m "initial commit"
   $ git remote add origin https://github.com/francomekus/francomekus_sample.git
-  $ git push -u origin master ```
+  $ git push -u origin master 
+  ```
   ## Deploying to Heroku
   Sign up for heroku free account and download Heroku CLI.
   ```$ heroku login```
@@ -162,11 +172,13 @@ class PostModelTest(TestCase):
   ```$ heroku create franco-sample
   $ heroku git: remote -a franco-sample
   $ heroku git push heroku master
-  $ heroku open```
+  $ heroku open
+  ```
   if you get error message with `collectstatic`  simply ignore it for now bydisapplying it.
    ```$ heroku config:set DISABLE_COLLECTSTATIC=1
    $ git push heroku master
-   $ heroku open```
+   $ heroku open
+   ```
    ## Fnal Test
    Our app in now online and can also be accessed form **curl**
    For POST request:

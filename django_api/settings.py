@@ -88,8 +88,7 @@ DATABASES = {
         'NAME': 'post',
         'USER': 'postgres',
         'PASSWORD': 'francomekus',
-        'HOST': 'localhost',
-        'PORT': 5432
+        'HOST': 'https://franco-sample.herokuapp.com/',
 }
 }
 

@@ -133,24 +133,23 @@ class PostModelTest(TestCase):
  ``` $ curl http://127.0.0.1:8000 -d "title=add your title here&body=add you body here" 
  ```
  for GET request:
-  ```$ curl http://127.0.0.1:8000
+  ```
+  $ curl http://127.0.0.1:8000
   ```
   ## Getting ready for deployment
   1. first install
-  ```$ pip install gunicorn
-     $ pip install whitenoise
+  ```
+  $ pip install gunicorn
+  $ pip install whitenoise
    ```
   2. Add a **Procfile** file with no extension(eg .txt) in the project root directoty.
   Open the **Procfile** and add
-   ```web: gunicorn django_api.wsgi --log-file -
-   ```
+   ```web: gunicorn django_api.wsgi --log-file -```
    3. Add a **runtime.txt** file in the project root and specify the correct python version.
    Open it and add
-   ```python-3.7.2
-   ```
+   ```python-3.7.2```
    4. Add a **requirements.txt** file.
-    ```pip freeze > requirements.txt
-   ```
+    ```pip freeze > requirements.txt```
  ## Set up the static Assets
  open `settings.py` file and add the following changes at the bottom.
   ```STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')```

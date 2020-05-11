@@ -168,9 +168,7 @@ class PostModelTest(TestCase):
    python-3.7.2
    ```
    4. Add a **requirements.txt** file.
-    ```
-    pip freeze > requirements.txt
-   ```
+    ```pip freeze > requirements.txt```
  ## Set up the static Assets
  open `settings.py` file and add the following changes at the bottom.
   ```
